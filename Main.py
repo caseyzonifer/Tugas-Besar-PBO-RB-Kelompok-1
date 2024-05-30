@@ -1,5 +1,6 @@
 import random, pygame
 import sys
+from abc import ABC, abstractmethod
 # pygame setup
 pygame.init()
 pygame.mixer.init()
@@ -8,7 +9,13 @@ pygame.display.set_caption('NebulaNymph')
 fps = pygame.time.Clock() 
 
 # Membuat class
-class Button(pygame.sprite.Sprite):
+
+class SpriteAbstract(ABC):
+    @abstractmethod
+    def update(self, *args, **kwargs):
+        pass
+
+class Button(SpriteAbstract, pygame.sprite.Sprite):
     def __init__(self,posX,posY,OnIMGpath,OffIMGpath,soundPath):
         super().__init__()
         self.OnIMG = pygame.image.load(OnIMGpath)
@@ -31,7 +38,7 @@ class Button(pygame.sprite.Sprite):
 buttonGO = Button(375,380,'images/menu/button START! on.png','images/menu/button START! off.png','audio/button select.mp3')
 buttonEXIT = Button(375,545,'images/menu/button EXIT! on.png','images/menu/button EXIT! off.png','audio/button select.mp3')
 
-class Player_Hitbox(pygame.sprite.Sprite):
+class Player_Hitbox(SpriteAbstract, pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
         self.Alive = True
@@ -60,7 +67,7 @@ class Player_Hitbox(pygame.sprite.Sprite):
 
 PlayerHitbox = Player_Hitbox()
 
-class PlayerAnimation(pygame.sprite.Sprite):
+class PlayerAnimation(SpriteAbstract, pygame.sprite.Sprite):
     def __init__(self,posX,posY):
         super().__init__()
     # RUNNING ANIMATION
@@ -72,7 +79,7 @@ class PlayerAnimation(pygame.sprite.Sprite):
         self.RunAnimFrameList.append(pygame.image.load('images/game/animated/player run/1.5.png').convert_alpha())
         self.RunAnimFrameList.append(pygame.image.load('images/game/animated/player run/1.6.png').convert_alpha())
         self.RunAnimFrameList.append(pygame.image.load('images/game/animated/player run/1.7.png').convert_alpha())
-    # FALLING ANIMATION
+    # JUMP ANIMATION
         self.JumpAnimFrameList = []
         self.JumpAnimFrameList.append(pygame.image.load('images/game/animated/player fall/1.png').convert_alpha())
         self.JumpAnimFrameList.append(pygame.image.load('images/game/animated/player fall/2.png').convert_alpha())
@@ -130,7 +137,7 @@ class PlayerAnimation(pygame.sprite.Sprite):
             if self.currentFrame >= len(self.CrashAnimFrameList): self.currentFrame = 0
             self.image = self.CrashAnimFrameList[int(self.currentFrame)]
 
-class ObsticleGround(pygame.sprite.Sprite):
+class ObsticleGround(SpriteAbstract, pygame.sprite.Sprite):
 
     def __init__(self,startingX,imagePath):
         super().__init__()
@@ -142,7 +149,7 @@ class ObsticleGround(pygame.sprite.Sprite):
         if self.rect.left <= respawnBorder:
             self.rect.left = random.randint(minRespawnX,maxRespawnX)
 
-class ObsticleGroundAnimated(pygame.sprite.Sprite):
+class ObsticleGroundAnimated(SpriteAbstract, pygame.sprite.Sprite):
 
     def __init__(self,startingX,framePath1,framePath2,framePath3):
         super().__init__()
@@ -168,7 +175,7 @@ class ObsticleGroundAnimated(pygame.sprite.Sprite):
         if self.rect.left > 1200:
             self.currentFrame = 0
 
-class PlanetBoost(pygame.sprite.Sprite):
+class PlanetBoost(SpriteAbstract,   pygame.sprite.Sprite):
     def __init__(self, image_0_path, image_1_path):
         super().__init__()
         self.image_0 = pygame.image.load(image_0_path)
@@ -242,7 +249,7 @@ gameSprites = pygame.sprite.Group()
 Game, Pause, Menu = False, False, True
 
 
-
+#File suara
 game_start_AUD = pygame.mixer.Sound('audio/game start.mp3')
 game_start_AUD.set_volume(0.17)
     
@@ -253,21 +260,21 @@ game_music_list.append(pygame.mixer.Sound('audio/game music 3.mp3'))
 game_music_list.append(pygame.mixer.Sound('audio/game music 4.mp3'))
 game_music = random.choice(game_music_list)
 game_music.set_volume(0.15)
-   
+#Gui elements
 high_score_label_cord = (10, 10)
 high_score = 0
 movementSpeedTimer = 0
 movementSpeed = 5
 groundX = -1100
-bebatuan = 3000
+surface_X_1 = 3000
 score = 0
 scoreTimer = 0
 
     
 ground_stoneAge = pygame.image.load('images/game/jalananbatuu.png').convert_alpha()
-bebatuan_IMG_1 = pygame.image.load('images/game/surface1.png').convert_alpha()
+surface_IMG_1 = pygame.image.load('images/game/surface1.png').convert_alpha()
 MeteorApi = 5000
-sky_background = pygame.image.load('images/game/back.png').convert_alpha()
+sky_backgr = pygame.image.load('images/game/back.png').convert_alpha()
 nightOverlayIMG = pygame.image.load('images/game/night overlay.png').convert_alpha()
 
 skyPosX = -2800
@@ -372,7 +379,7 @@ while True:
                     PlayerAnimHandle.AnimState = 'crash'
         
         groundX -= movementSpeed
-        bebatuan -= movementSpeed
+        surface_X_1 -= movementSpeed
         MeteorApi -= movementSpeed
         movementSpeedTimer += 1
 
@@ -381,7 +388,7 @@ while True:
             movementSpeedTimer = 0
 
         if groundX <= -5500: groundX = 0
-        if bebatuan <= -1200: bebatuan = MeteorApi + random.randint(50,2500)
+        if surface_X_1 <= -1200: surface_X_1 = MeteorApi + random.randint(50,2500)
         if MeteorApi <= -1200: MeteorApi = random.randint(4000,8000)
         
         if aliennebula.rect.colliderect(MeteorBesar.rect):
@@ -414,7 +421,7 @@ while True:
             score += 1 
             scoreTimer = 0
 
-        screen.blit(sky_background, (skyPosX,0))
+        screen.blit(sky_backgr, (skyPosX,0))
         screen.blit(ground_stoneAge, (groundX,540))
         gameSprites.draw(screen)
         PlayerAnimHandle.update(0.18)
@@ -425,7 +432,7 @@ while True:
         MeteorSedang.update(movementSpeed,3500,1300,-63)
         MeteorBesar.update(movementSpeed,5800,1500,-77)
         aliennebula.update(movementSpeed,6500,2200,-105,0.4)
-        screen.blit(bebatuan_IMG_1, (bebatuan,180))
+        screen.blit(surface_IMG_1, (surface_X_1,180))
 
     # Player Health
         pygame.draw.rect(screen, HPbar_RGB, (30, 400, 15, HPbar_height))
