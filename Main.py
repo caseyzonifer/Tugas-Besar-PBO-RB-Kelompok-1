@@ -50,6 +50,17 @@ class Player_Hitbox(SpriteAbstract, pygame.sprite.Sprite):
         self.dead = False
     def update(self,posY):
         self.rect.bottom = posY-15
+
+    def get_HP(self):
+        return self._HP
+    
+    def set_HP(self, value):
+        if value < 0:
+            self._HP = 0
+        elif value > 255:
+            self._HP = 255
+        else: 
+            self._HP = value
     
     def PlayerCollisionCheck(self,BatuApiRect,MeteorSedangRect,MeteorBesarRect,aliennebulaRect):
         if self.rect.colliderect(MeteorSedangRect) or self.rect.colliderect(BatuApiRect) or self.rect.colliderect(MeteorBesarRect) or self.rect.colliderect(aliennebulaRect):
