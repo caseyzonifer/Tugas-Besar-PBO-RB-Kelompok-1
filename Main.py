@@ -10,12 +10,12 @@ fps = pygame.time.Clock()
 
 # Membuat class
 
-class SpriteAbstract(ABC):
+class SpriteAbstract(ABC, pygame.sprite.Sprite):
     @abstractmethod
     def update(self, *args, **kwargs):
         pass
 
-class Button(SpriteAbstract, pygame.sprite.Sprite):
+class Button(SpriteAbstract):
     def __init__(self,posX,posY,OnIMGpath,OffIMGpath,soundPath):
         super().__init__()
         self.OnIMG = pygame.image.load(OnIMGpath)
@@ -38,7 +38,7 @@ class Button(SpriteAbstract, pygame.sprite.Sprite):
 buttonGO = Button(375,380,'images/menu/button START! on.png','images/menu/button START! off.png','audio/button select.mp3')
 buttonEXIT = Button(375,545,'images/menu/button EXIT! on.png','images/menu/button EXIT! off.png','audio/button select.mp3')
 
-class Player_Hitbox(SpriteAbstract, pygame.sprite.Sprite):
+class Player_Hitbox(SpriteAbstract):
     def __init__(self):
         super().__init__()
         self.Alive = True
@@ -78,7 +78,7 @@ class Player_Hitbox(SpriteAbstract, pygame.sprite.Sprite):
 
 PlayerHitbox = Player_Hitbox()
 
-class PlayerAnimation(SpriteAbstract, pygame.sprite.Sprite):
+class PlayerAnimation(SpriteAbstract):
     def __init__(self,posX,posY):
         super().__init__()
     # RUNNING ANIMATION
@@ -148,7 +148,7 @@ class PlayerAnimation(SpriteAbstract, pygame.sprite.Sprite):
             if self.currentFrame >= len(self.CrashAnimFrameList): self.currentFrame = 0
             self.image = self.CrashAnimFrameList[int(self.currentFrame)]
 
-class ObsticleGround(SpriteAbstract, pygame.sprite.Sprite):
+class ObsticleGround(SpriteAbstract):
 
     def __init__(self,startingX,imagePath):
         super().__init__()
@@ -160,7 +160,7 @@ class ObsticleGround(SpriteAbstract, pygame.sprite.Sprite):
         if self.rect.left <= respawnBorder:
             self.rect.left = random.randint(minRespawnX,maxRespawnX)
 
-class ObsticleGroundAnimated(SpriteAbstract, pygame.sprite.Sprite):
+class ObsticleGroundAnimated(SpriteAbstract):
 
     def __init__(self,startingX,framePath1,framePath2,framePath3):
         super().__init__()
@@ -186,7 +186,7 @@ class ObsticleGroundAnimated(SpriteAbstract, pygame.sprite.Sprite):
         if self.rect.left > 1200:
             self.currentFrame = 0
 
-class PlanetBoost(SpriteAbstract,   pygame.sprite.Sprite):
+class PlanetBoost(SpriteAbstract):
     def __init__(self, image_0_path, image_1_path):
         super().__init__()
         self.image_0 = pygame.image.load(image_0_path)
