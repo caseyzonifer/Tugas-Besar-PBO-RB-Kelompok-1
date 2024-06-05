@@ -1,4 +1,12 @@
 # Judul Game : NebulaNymph
 ___________________________________________________________________________________________________________________________________________________________________________________________
-Deskripsi Game : 
+Deskripsi Game : “NebulaNymph” adalah sebuah game endless runner dengan tema petualangan luar angkasa. Game ini menampilkan karakter utama "SpaceMan" yang berlari tanpa henti dalam sebuah 
+lingkungan galaksi yang menantang.Tujuan pemain adalah berlari sejauh mungkin sambil menghindari berbagai rintangan yang muncul di sepanjang jalur. Pemain juga harus melompat, berlari, 
+dan menghindari rintangan yang muncul, baik rintangan diam seperti batu api dan meteor, maupun rintangan bergerak dengan animasi seperti alien nebula. Selain menghindari rintangan, pemain 
+juga dapat mengumpulkan objek tertentu yang memberikan bonus skor atau efek khusus, seperti memperlambat gerakan. NebulaNymph menawarkan pengalaman petualangan galaksi yang unik dan
+menyenangkan bagi para pemain.
+
 Konsep Game : SpaceMan akan  terus berlari dan melompat menghindari obstacles yang ada. Pemain dapat mengendalikan SpaceMan dengan menekan tombol space untuk melompat menghindari tantangan.
+# Kelompok 1
+![NAMA KELOMPK](https://github.com/caseyzonifer/Tugas-Besar-PBO-RB-Kelompok-1/assets/145270046/a2f83ca6-41b8-4a3e-9590-8810d201531a)
+
