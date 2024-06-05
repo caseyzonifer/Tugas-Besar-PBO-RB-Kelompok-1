@@ -9,6 +9,16 @@ menyenangkan bagi para pemain.
 Konsep Game : SpaceMan akan  terus berlari dan melompat menghindari obstacles yang ada. Pemain dapat mengendalikan SpaceMan dengan menekan tombol space untuk melompat menghindari tantangan.
 # Kelompok 1
 ![NAMA KEL 1](https://github.com/caseyzonifer/Tugas-Besar-PBO-RB-Kelompok-1/assets/145270046/a582a0d5-ac11-4c3b-9dd9-617b0848e772)
+# Tampilan Game
+![image](https://github.com/caseyzonifer/Tugas-Besar-PBO-RB-Kelompok-1/assets/145270046/c1999abd-56e1-47ee-b67e-e954b245ddf8)
+![image](https://github.com/caseyzonifer/Tugas-Besar-PBO-RB-Kelompok-1/assets/145270046/b7486914-23f6-4a85-990d-bc7ba56d26f5)
+![image](https://github.com/caseyzonifer/Tugas-Besar-PBO-RB-Kelompok-1/assets/145270046/163af952-e88a-413c-9fd1-1d2ab63183ba)
+![image](https://github.com/caseyzonifer/Tugas-Besar-PBO-RB-Kelompok-1/assets/145270046/852fef9a-fb1b-4c63-b965-f6f202deaca8)
+# Lampiran Design Game 
+
+
+
+
 
 
 
