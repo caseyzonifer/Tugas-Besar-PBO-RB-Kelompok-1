@@ -1,12 +1,17 @@
 import random, pygame
 import sys
 from abc import ABC, abstractmethod
+
 # pygame setup
-pygame.init()
-pygame.mixer.init()
-screen = pygame.display.set_mode((1100,800))
-pygame.display.set_caption('NebulaNymph')
-fps = pygame.time.Clock() 
+try:
+    pygame.init()
+    pygame.mixer.init()
+    screen = pygame.display.set_mode((1100,800))
+    pygame.display.set_caption('NebulaNymph')
+    fps = pygame.time.Clock() 
+except pygame.error as e:
+    print(f"Error initializing pygame: {e}")
+    sys.exit(1)
 
 # Membuat class
 
@@ -18,12 +23,16 @@ class SpriteAbstract(ABC, pygame.sprite.Sprite):
 class Button(SpriteAbstract):
     def __init__(self,posX,posY,OnIMGpath,OffIMGpath,soundPath):
         super().__init__()
-        self.OnIMG = pygame.image.load(OnIMGpath)
-        self.OffIMG = pygame.image.load(OffIMGpath)
-        self.rect = self.OffIMG.get_rect(topleft = (posX,posY))
-        self.image = self.OnIMG
-        self.sound = pygame.mixer.Sound(soundPath)
-        self.soundPlayed = False
+        try:
+            self.OnIMG = pygame.image.load(OnIMGpath)
+            self.OffIMG = pygame.image.load(OffIMGpath)
+            self.rect = self.OffIMG.get_rect(topleft = (posX,posY))
+            self.image = self.OnIMG
+            self.sound = pygame.mixer.Sound(soundPath)
+            self.soundPlayed = False
+        except pygame.error as e:
+            print(f"Error loading image or sound: {e}")
+
     def update(self):
         self.mousePos = pygame.mouse.get_pos()
         if self.rect.collidepoint(self.mousePos):
@@ -41,13 +50,16 @@ buttonEXIT = Button(375,545,'images/menu/button EXIT! on.png','images/menu/butto
 class Player_Hitbox(SpriteAbstract):
     def __init__(self):
         super().__init__()
-        self.Alive = True
-        self.taking_damage = False
-        self.HP = 255
-        self.image = pygame.image.load('images/game/player_hitbox.png').convert_alpha()
-        self.rect = self.image.get_rect(midbottom = (210,0))
-        self.aliennebulaCollided = False
-        self.dead = False
+        try:
+            self.image = pygame.image.load('images/game/player_hitbox.png').convert_alpha()
+            self.rect = self.image.get_rect(midbottom = (210,0))
+            self.aliennebulaCollided = False
+            self.dead = False
+            self.HP = 255
+            self.taking_damage = False
+        except pygame.error as e:
+            print(f"Error loading image: {e}")
+    
     def update(self,posY):
         self.rect.bottom = posY-15
 
@@ -61,7 +73,7 @@ class Player_Hitbox(SpriteAbstract):
             self._HP = 255
         else: 
             self._HP = value
-    
+
     def PlayerCollisionCheck(self,BatuApiRect,MeteorSedangRect,MeteorBesarRect,aliennebulaRect):
         if self.rect.colliderect(MeteorSedangRect) or self.rect.colliderect(BatuApiRect) or self.rect.colliderect(MeteorBesarRect) or self.rect.colliderect(aliennebulaRect):
             self.HP -= 3
@@ -69,7 +81,7 @@ class Player_Hitbox(SpriteAbstract):
         else: self.taking_damage = False
 
         if self.HP <= 0:
-            self.Alive = False
+            self.alive = True
             self.dead = True
 
         if self.rect.colliderect(aliennebulaRect):
@@ -448,7 +460,7 @@ while True:
     # Player Health
         pygame.draw.rect(screen, HPbar_RGB, (30, 400, 15, HPbar_height))
     # Player Death
-        if not PlayerHitbox.Alive:
+        if not PlayerHitbox.alive:
             Game, Menu = False, True
             PlayerHitbox.Alive, PlayerHitbox.HP = True, 255
             score = 0
