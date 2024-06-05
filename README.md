@@ -12,8 +12,13 @@ Konsep Game : SpaceMan akan  terus berlari dan melompat menghindari obstacles ya
 # Tampilan Game
 ![image](https://github.com/caseyzonifer/Tugas-Besar-PBO-RB-Kelompok-1/assets/145270046/eea41bc2-252a-486d-8a8a-ede8d1bbf8e2)
 # Lampiran Design Game 
-![image](https://github.com/caseyzonifer/Tugas-Besar-PBO-RB-Kelompok-1/assets/145270046/729ab175-56e9-452f-a96f-3f577ccd5375)
+![image](https://github.com/caseyzonifer/Tugas-Besar-PBO-RB-Kelompok-1/assets/145270046/67b5c466-f129-414e-9dd2-85f0eba841ec)
 # Lampiran Design Tombol Game
+![image](https://github.com/caseyzonifer/Tugas-Besar-PBO-RB-Kelompok-1/assets/145270046/b6463d59-9e23-4c6f-ab75-33ccb46ae0de)
+# Rules Bermain
+![Cuplikan layar 2024-06-05 121037](https://github.com/caseyzonifer/Tugas-Besar-PBO-RB-Kelompok-1/assets/145270046/517ad8b6-7b91-444f-a3d1-86726539512d)
+
+
 
 
 
